@@ -17,7 +17,7 @@ CREATE TABLE data_device (
     device_id varchar(50),
     temperature float NOT NULL,
     humidity float NOT NULL,
-    date_measurement DATE NOT NULL,
+    date_measurement varchar(50) NOT NULL,
     PRIMARY KEY (id)
 );
 
