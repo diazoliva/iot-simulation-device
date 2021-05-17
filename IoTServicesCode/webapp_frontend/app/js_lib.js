@@ -19,9 +19,9 @@ function createElement(Type, ClassName, Content) {
 
 
 function createTableMeasurements(Id, Location, State){
-    let device_id = createElement("p", ["titleId", Id], Id);
-    let location = createElement("p", ["titleLocation", Location], Location);
-    let state = createElement("p", ["titleState", State], State);
+    let device_id = createElement("p", ["titleId", Id], [Id]);
+    let location = createElement("p", ["titleLocation", Location], [Location]);
+    let state = createElement("p", ["titleState", State], [State]);
 
     let title = createElement("div", ["title"], [device_id.outerHTML, " - ", state.outerHTML, " - ", location.outerHTML])
     let table = createElement("div", ["table " + Id], [title]);
