@@ -24,7 +24,7 @@ function createTableMeasurements(Id, Location, State) {
     let state = createElement("p", ["titleState", State], [State]);
 
     let title = createElement("div", ["title"], [device_id.outerHTML, " - ", state.outerHTML, " - ", location.outerHTML])
-    let table = createElement("div", ["table " + Id], [title.outerHTML]);
+    let table = createElement("div", ["table" + Id], [title.outerHTML]);
     return table;
 }
 
@@ -47,7 +47,7 @@ let get_current_sensor_data = function () {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             let columnMeasurement = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
-            $(columnMeasurement).appendTo(".table " + paramsData.device_id);
+            $(columnMeasurement).appendTo(".table" + paramsData.device_id);
         }
     });
 }
