@@ -17,7 +17,7 @@ def connect_database():
 def devices_register(params):
     mydb = connect_database()
     with mydb.cursor() as mycursor:
-        query = "INSERT INTO devices (device_id, location, state) VALUES (%s, %s, %s);"
+        query = "INSERT INTO state_device (device_id, location, state) VALUES (%s, %s, %s);"
         device_info = (params["device_id"], params["location"], params["state"])
         try:
             mycursor.execute(query, device_info)
@@ -31,7 +31,7 @@ def devices_retriever():
     mydb = connect_database()
     r = []
     with mydb.cursor() as mycursor:
-        query = "SELECT device_id, location, state FROM devices ORDER BY id DESC;"
+        query = "SELECT device_id, location, state FROM state_device ORDER BY id DESC;"
         mycursor.execute(query)
         myresult = mycursor.fetchall()
         for device_id, location, state in myresult:
