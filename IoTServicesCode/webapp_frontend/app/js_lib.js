@@ -48,7 +48,7 @@ let get_current_sensor_data = function () {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
-            $(columnMeasurements).appendTo(".table " + paramsData.device_id);
+            $(columnMeasurements).appendTo(".table." + paramsData.device_id);
         }
     });
 }
