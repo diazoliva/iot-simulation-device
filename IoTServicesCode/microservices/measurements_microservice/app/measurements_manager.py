@@ -17,7 +17,7 @@ def connect_database():
 def measurements_register(params):
     mydb = connect_database()
     with mydb.cursor() as mycursor:
-        query = "INSERT INTO data_device (device_id, temperature, humidity ,date_measurement) VALUES (%s, %s, %s, %s);"
+        query = "INSERT INTO data_device (device_id, temperature, humidity, date_measurement) VALUES (%s, %s, %s, %s);"
         measurements = (params["device_id"], params["temperature"], params["humidity"], params["date_measurement"])
         try:
             mycursor.execute(query, measurements)

@@ -23,7 +23,7 @@ services:
       - DBHOST=mariaDB
       - DBUSER=iot_user
       - DBPASSWORD=9R[-RP#64nY7*E*H
-      - DBDATABASE=iot_data
+      - DBDATABASE=iot_final_data
     depends_on:
       - mariaDB
   measurements_microservice:
