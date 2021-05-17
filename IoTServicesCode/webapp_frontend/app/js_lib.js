@@ -36,7 +36,7 @@ let get_current_sensor_data = function () {
         $(".measurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let columnMeasurement = createColumnMeasurement(paramsData.id_device, paramsData.temperature, paramsData.humidity, paramsDate.date_measurement);
+            let columnMeasurement = createColumnMeasurement(paramsData.id_device, paramsData.temperature, paramsData.humidity, paramsData.date_measurement);
             $(columnMeasurement).appendTo(".measurements > .table");
         }
     });
