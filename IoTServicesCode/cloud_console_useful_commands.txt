@@ -1,3 +1,4 @@
 docker-compose build
 docker-compose up -d
 docker exec -it iotservicescode_webapp_backend_1 /bin/bash
+docker exec -it iotservicescode_mariaDB_1 /bin/bash

@@ -1,4 +1,6 @@
-docker exec -it mariaDB mysql
+docker exec -it iotservicescode_mariaDB_1 /bin/bash
+
+mysql -uroot -p
 
 #Create database
 create database iot_final_data;
