@@ -18,13 +18,13 @@ function createElement(Type, ClassName, Content) {
 }
 
 
-function createTableMeasurements(Id, Location, State){
+function createTableMeasurements(Id, Location, State) {
     let device_id = createElement("p", ["titleId", Id], [Id]);
     let location = createElement("p", ["titleLocation", Location], [Location]);
     let state = createElement("p", ["titleState", State], [State]);
 
     let title = createElement("div", ["title"], [device_id.outerHTML, " - ", state.outerHTML, " - ", location.outerHTML])
-    let table = createElement("div", ["table " + Id], [title]);
+    let table = createElement("div", ["table " + Id], [title.outerHTML]);
     return table;
 }
 
@@ -40,7 +40,6 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
 }
 
 
-
 let server_address = "http://35.195.224.142:5000/"
 let get_current_sensor_data = function () {
     $.getJSON(server_address + "dso/measurements/", function (data) {
@@ -53,13 +52,13 @@ let get_current_sensor_data = function () {
     });
 }
 
-var get_device_list = function () {
+let get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var paramsData = data[i];
+        for (let i = 0; i < data.length; i++) {
+            let paramsData = data[i];
             let idTable = createTableMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
             $(idTable).appendTo(".measurements");
-            $("<div> Devices: " + paramsData.device + "</div>").appendTo(".device_list");
+            $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
     });
 }
