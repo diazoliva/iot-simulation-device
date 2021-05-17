@@ -17,15 +17,26 @@ function createElement(Type, ClassName, Content) {
     return elem;
 }
 
+
+function createTableMeasurements(Id, Location, State){
+    let device_id = createElement("p", ["titleId", Id], Id);
+    let location = createElement("p", ["titleLocation", Location], Location);
+    let state = createElement("p", ["titleState", State], State);
+
+    let title = createElement("div", ["title"], [device_id.outerHTML, " - ", state.outerHTML, " - ", location.outerHTML])
+    let table = createElement("div", ["table " + Id], [title]);
+    return table;
+}
+
 function createColumnMeasurement(Id, Temperature, Humidity, Date) {
-    let contentDate = createElement("div", ["cell", "date_measurement"], [Date]);
+    let contentDate = createElement("div", ["cell", "date"], [Date]);
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
-    let button = createElement("button", ["buttonMeasurements"], ["Medidas"]);
-    let column = createElement("div", ["column", Id], [columnMeasurements.outerHTML, button.outerHTML]);
-    return column;
+    //let button = createElement("button", ["buttonData"], ["Medidas"]);
+    //let column = createElement("div", ["columnMeasurements", Id], [columnMeasurements.outerHTML, button.outerHTML]);
+    return columnMeasurements;
 }
 
 
@@ -36,8 +47,8 @@ let get_current_sensor_data = function () {
         $(".measurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let columnMeasurement = createColumnMeasurement(paramsData.id_device, paramsData.temperature, paramsData.humidity, paramsData.date);
-            $(columnMeasurement).appendTo(".measurements");
+            let columnMeasurement = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
+            $(columnMeasurement).appendTo(".table " + paramsData.device_id);
         }
     });
 }
@@ -46,9 +57,12 @@ var get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
         for (var i = 0; i < data.length; i++) {
             var paramsData = data[i];
+            let idTable = createTableMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
+            $(idTable).appendTo(".measurements");
             $("<div> Devices: " + paramsData.device + "</div>").appendTo(".device_list");
         }
     });
 }
 
-setInterval(get_current_sensor_data, 50000);
+get_device_list();
+setInterval(get_current_sensor_data, 2000);

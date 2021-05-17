@@ -17,11 +17,10 @@ def connect_database():
 def devices_register(params):
     mydb = connect_database()
     with mydb.cursor() as mycursor:
-        query = "INSERT INTO devices (device_id) VALUES (%s);"
-        val = params["device"]
-        device_id = (val,)
+        query = "INSERT INTO devices (device_id, location, state) VALUES (%s, %s, %s);"
+        device_info = (params["device_id"], params["location"], params["state"])
         try:
-            mycursor.execute(query, device_id)
+            mycursor.execute(query, device_info)
             mydb.commit()
             print(mycursor.rowcount, "record inserted.")
         except:
@@ -32,11 +31,11 @@ def devices_retriever():
     mydb = connect_database()
     r = []
     with mydb.cursor() as mycursor:
-        query = "SELECT device_id FROM devices ORDER BY id DESC;"
+        query = "SELECT device_id, location, state FROM devices ORDER BY id DESC;"
         mycursor.execute(query)
         myresult = mycursor.fetchall()
-        for device_id in myresult:
-            r.append({"device_id": device_id})
+        for device_id, location, state in myresult:
+            r.append({"device_id": device_id, "location": location, "state": state})
         mydb.commit()
 
     result = json.dumps(r, sort_keys=True)

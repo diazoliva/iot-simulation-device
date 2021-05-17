@@ -7,34 +7,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 95%;
 }
 
-.measurements > table {
-    width: 97%;
+.measurements > .table{
     border-bottom: 1px solid black;
     border-left: 1px solid black;
 }
 
-.measurements > .table > .columnMeasurements{
+.measurements > .table > .columnMeasurements {
     border-top: 1px solid black;
     border-right: 1px solid black;
-    width: 90%;
 }
 
-.measurements > .table > .buttonMeasurements{
-    border: 1px solid black;
-    width: 9%;
-    margin-left: 10px;
-}
-
-.measurements > .table > .columnMeasurements > .date_measurement{
+.measurements > .table > .columnMeasurements > .date {
     width: 50%;
 }
 
-.measurements > .table > .columnMeasurements > .temperature{
+.measurements > .table > .columnMeasurements > .temperature {
     width: 25%;
 }
 
-.measurements > .table > .columnMeasurements > .humidity{
+.measurements > .table > .columnMeasurements > .humidity {
     width: 25%;
 }
