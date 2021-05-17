@@ -3,7 +3,7 @@
     padding: 10px;
 }
 
-.measurements > .title{
+.measurements > .device > .title{
     display: flex;
     justify-content: center;
     align-items: center;
