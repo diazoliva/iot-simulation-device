@@ -17,8 +17,8 @@ function createElement(Type, ClassName, Content) {
     return elem;
 }
 
-function createColumnMeasurement(Id, Temperature, Humidity, date) {
-    let contentDate = createElement("div", ["cell", "date_measurement"], [date]);
+function createColumnMeasurement(Id, Temperature, Humidity, Date) {
+    let contentDate = createElement("div", ["cell", "date_measurement"], [Date]);
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
 
@@ -36,7 +36,7 @@ let get_current_sensor_data = function () {
         $(".measurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let columnMeasurement = createColumnMeasurement(paramsData.temperature, paramsData.humidity, params.date);
+            let columnMeasurement = createColumnMeasurement(paramsData.id_device, paramsData.temperature, paramsData.humidity, paramsDate.date_measurement);
             $(columnMeasurement).appendTo(".measurements > .table");
         }
     });
