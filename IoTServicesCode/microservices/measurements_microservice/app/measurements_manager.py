@@ -31,7 +31,7 @@ def measurements_retriever():
     mydb = connect_database()
     r = []
     with mydb.cursor() as mycursor:
-        query = "SELECT device_id, temperature, humidity ,date_measurement FROM data_device ORDER BY id DESC;"
+        query = "SELECT device_id, temperature, humidity, date_measurement FROM data_device ORDER BY id DESC;"
         mycursor.execute(query)
         myresult = mycursor.fetchall()
         for device_id, temperature, humidity, date_measurement in myresult:
