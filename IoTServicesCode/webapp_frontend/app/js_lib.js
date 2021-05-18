@@ -38,20 +38,11 @@ function createTableMeasurement(Id, Location, State) {
 
 function createColumnTitleMeasurement(){
     let titleDate = createElement("div", ["titleCell", "date"], ["Measurements"]);
-    titleDate.style.display = "flex";
     titleDate.style.width = "50%";
-    titleDate.style.justifyContent = "center";
-    titleDate.style.fontWeight = "bold";
     let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
-    titleTemperature.style.display = "flex";
     titleTemperature.style.width = "25%";
-    titleTemperature.style.justifyContent = "center";
-    titleTemperature.style.fontWeight = "bold";
     let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
-    titleHumidity.style.display = "flex";
     titleHumidity.style.width = "25%";
-    titleHumidity.style.justifyContent = "center";
-    titleHumidity.style.fontWeight = "bold";
 
     let columnTitle = createElement("div", ["columnTitle"], [titleDate.outerHTML, titleTemperature.outerHTML, titleHumidity.outerHTML]);
     columnTitle.style.display = "flex";
@@ -61,6 +52,8 @@ function createColumnTitleMeasurement(){
     columnTitle.style.borderTop = "2px solid black";
     columnTitle.style.borderBottom = "2px solid black";
     columnTitle.style.alignItems = "center";
+    columnTitle.style.justifyContent = "center";
+    columnTitle.style.fontWeight = "bold";
 
     return columnTitle;
 }
@@ -82,7 +75,6 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     contentHumidity.style.width = "25%";
     contentHumidity.style.display = "flex";
     contentHumidity.style.justifyContent = "center";
-    contentHumidity.style.alignItems = "center";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
@@ -90,6 +82,7 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     columnMeasurements.style.borderRight = "1px solid black";
     columnMeasurements.style.borderLeft = "1px solid black";
     columnMeasurements.style.borderTop = "1px solid black";
+    columnMeasurements.style.alignItems = "center";
     return columnMeasurements;
 }
 
