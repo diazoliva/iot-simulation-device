@@ -39,21 +39,30 @@ function createTableMeasurement(Id, Location, State) {
 function createColumnTitleMeasurement(){
     let titleDate = createElement("div", ["titleCell", "date"], ["Measurements"]);
     titleDate.style.display = "flex";
+    titleDate.style.width = "50%";
     titleDate.style.justifyContent = "center";
     titleDate.style.alignContent = "center";
     titleDate.style.fontWeight = "bold";
     let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
     titleTemperature.style.display = "flex";
+    titleTemperature.style.width = "25%";
     titleTemperature.style.justifyContent = "center";
     titleTemperature.style.alignContent = "center";
     titleTemperature.style.fontWeight = "bold";
     let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
     titleHumidity.style.display = "flex";
+    titleHumidity.style.width = "25%";
     titleHumidity.style.justifyContent = "center";
     titleHumidity.style.alignContent = "center";
     titleHumidity.style.fontWeight = "bold";
 
     let columnTitle = createElement("div", ["columnTitle"], [titleDate.outerHTML, titleTemperature.outerHTML, titleHumidity.outerHTML]);
+    columnTitle.style.display = "flex";
+    columnTitle.style.height = "30px";
+    columnTitle.style.borderRight = "1px solid black";
+    columnTitle.style.borderLeft = "1px solid black";
+    columnTitle.style.borderTop = "1px solid black";
+
     return columnTitle;
 }
 
@@ -107,7 +116,7 @@ let get_device_list = function () {
             let deviceContent = createTableMeasurement(paramsData.device_id, paramsData.location, paramsData.state);
             $(deviceContent).appendTo(".measurements");
             let tableTitle = createColumnTitleMeasurement();
-            $(tableTitle).appendTo(".superiorTable." + paramsData.device_id);
+            $(tableTitle).prependTo(".superiorTable." + paramsData.device_id);
             $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
     });
