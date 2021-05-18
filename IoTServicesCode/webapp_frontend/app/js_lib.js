@@ -18,31 +18,36 @@ function createElement(Type, ClassName, Content) {
 }
 
 
-function createTableMeasurements(Id, Location, State) {
+function createTableMeasurement(Id, Location, State) {
+    let reference_device = createElement("p", ["titleReference"],["Device:"]);
+    reference_device.style.paddingRight = "7.5px";
     let device_id = createElement("p", ["titleId"], [Id]);
-    let underscore = createElement("p", ["titleUnderscore"], ["-"])
-    underscore.style.padding = "0 5px";
+    let underscore = createElement("p", ["titleUnderscore"], ["-"]);
+    underscore.style.padding = "0 10px";
     let location = createElement("p", ["titleLocation"], [Location]);
     let state = createElement("p", ["titleState"], [State]);
 
-    let title = createElement("div", ["title"], [device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML])
+    let title = createElement("div", ["title"], [reference_device.outerHTML, device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML]);
     let table = createElement("div", ["table", Id], null);
-    let deviceContent = createElement("div", ["device", Id], [title.outerHTML, table.outerHTML])
+    table.style.marginTop = "200px";
+    table.style.borderBottom = "1px solid black";
+    let deviceContent = createElement("div", ["device", Id], [title.outerHTML, table.outerHTML]);
     return deviceContent;
 }
 
 function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     let contentDate = createElement("div", ["cell", "date"], [Date]);
     contentDate.style.width = "50%";
+    contentDate.style.borderRight = "1px solid black";
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     contentTemperature.style.width = "25%";
+    contentTemperature.style.borderRight = "1px solid black";
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
     contentHumidity.style.width = "25%";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
-    //let button = createElement("button", ["buttonData"], ["Medidas"]);
-    //let column = createElement("div", ["columnMeasurements", Id], [columnMeasurements.outerHTML, button.outerHTML]);
+    columnMeasurements.style.borderTop = "1px solid black";
     return columnMeasurements;
 }
 
@@ -63,7 +68,7 @@ let get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let deviceContent = createTableMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
+            let deviceContent = createTableMeasurement(paramsData.device_id, paramsData.location, paramsData.state);
             $(deviceContent).appendTo(".measurements");
             $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
