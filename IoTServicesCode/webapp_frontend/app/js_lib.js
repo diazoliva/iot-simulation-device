@@ -29,10 +29,31 @@ function createTableMeasurement(Id, Location, State) {
 
     let title = createElement("div", ["title"], [reference_device.outerHTML, device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML]);
     let table = createElement("div", ["table", Id], null);
-    table.style.marginTop = "200px";
+    table.style.marginTop = "10px";
     table.style.borderBottom = "1px solid black";
     let deviceContent = createElement("div", ["device", Id], [title.outerHTML, table.outerHTML]);
     return deviceContent;
+}
+
+function createColumnTitleMeasurement(){
+    let titleDate = createElement("div", ["titleCell", "date"], ["Measurements"]);
+    titleDate.style.display = "flex";
+    titleDate.style.justifyContent = "center";
+    titleDate.style.alignContent = "center";
+    titleDate.style.fontWeight = "bold";
+    let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
+    titleTemperature.style.display = "flex";
+    titleTemperature.style.justifyContent = "center";
+    titleTemperature.style.alignContent = "center";
+    titleTemperature.style.fontWeight = "bold";
+    let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
+    titleHumidity.style.display = "flex";
+    titleHumidity.style.justifyContent = "center";
+    titleHumidity.style.alignContent = "center";
+    titleHumidity.style.fontWeight = "bold";
+
+    let columnTitle = createElement("div", ["columnTitle"], [titleDate.outerHTML, titleTemperature.outerHTML, titleHumidity.outerHTML]);
+    return columnTitle;
 }
 
 function createColumnMeasurement(Id, Temperature, Humidity, Date) {
@@ -41,15 +62,18 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     contentDate.style.borderRight = "1px solid black";
     contentDate.style.display = "flex";
     contentDate.style.justifyContent = "center";
+    contentDate.style.alignContent = "center";
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     contentTemperature.style.width = "25%";
     contentTemperature.style.borderRight = "1px solid black";
     contentTemperature.style.display = "flex";
     contentTemperature.style.justifyContent = "center";
+    contentTemperature.style.alignContent = "center";
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
     contentHumidity.style.width = "25%";
     contentHumidity.style.display = "flex";
     contentHumidity.style.justifyContent = "center";
+    contentHumidity.style.alignContent = "center";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
@@ -59,6 +83,8 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     columnMeasurements.style.borderTop = "1px solid black";
     return columnMeasurements;
 }
+
+
 
 
 let server_address = "http://34.76.11.68:5000/"
@@ -79,6 +105,8 @@ let get_device_list = function () {
             let paramsData = data[i];
             let deviceContent = createTableMeasurement(paramsData.device_id, paramsData.location, paramsData.state);
             $(deviceContent).appendTo(".measurements");
+            let tableTitle = createColumnTitleMeasurement();
+            $(tableTitle).appendTo(".table." + paramsData.device_id);
             $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
     });
