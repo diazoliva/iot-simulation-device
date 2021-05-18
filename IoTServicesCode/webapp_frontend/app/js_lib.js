@@ -20,10 +20,12 @@ function createElement(Type, ClassName, Content) {
 
 function createTableMeasurements(Id, Location, State) {
     let device_id = createElement("p", ["titleId"], [Id]);
+    let underscore = createElement("p", ["titleUnderscore"], ["-"])
+    underscore.style.padding = "0 5px";
     let location = createElement("p", ["titleLocation"], [Location]);
     let state = createElement("p", ["titleState"], [State]);
 
-    let title = createElement("div", ["title"], [device_id.outerHTML, " - ", state.outerHTML, " - ", location.outerHTML])
+    let title = createElement("div", ["title"], [device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML])
     let table = createElement("div", ["table", Id], null);
     let deviceContent = createElement("div", ["device", Id], [title.outerHTML, table.outerHTML])
     return deviceContent;
@@ -31,10 +33,14 @@ function createTableMeasurements(Id, Location, State) {
 
 function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     let contentDate = createElement("div", ["cell", "date"], [Date]);
+    contentDate.style.width = "50%";
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
+    contentTemperature.style.width = "25%";
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
+    contentHumidity.style.width = "25%";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
+    columnMeasurements.style.display = "flex";
     //let button = createElement("button", ["buttonData"], ["Medidas"]);
     //let column = createElement("div", ["columnMeasurements", Id], [columnMeasurements.outerHTML, button.outerHTML]);
     return columnMeasurements;
