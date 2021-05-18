@@ -41,7 +41,7 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
 }
 
 
-let server_address = "http://35.195.224.142:5000/"
+let server_address = "http://34.76.11.68:5000/"
 let get_current_sensor_data = function () {
     $.getJSON(server_address + "dso/measurements/", function (data) {
         $(".table").empty();
