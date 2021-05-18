@@ -29,9 +29,10 @@ function createTableMeasurement(Id, Location, State) {
 
     let title = createElement("div", ["title"], [reference_device.outerHTML, device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML]);
     let table = createElement("div", ["table", Id], null);
-    table.style.marginTop = "10px";
-    table.style.borderBottom = "1px solid black";
-    let deviceContent = createElement("div", ["device", Id], [title.outerHTML, table.outerHTML]);
+    let superiorTable = createElement("div", ["superiorTable"], Id, [table.outerHTML])
+    superiorTable.style.marginTop = "10px";
+    superiorTable.style.borderBottom = "1px solid black";
+    let deviceContent = createElement("div", ["device", Id], [title.outerHTML, superiorTable.outerHTML]);
     return deviceContent;
 }
 
@@ -106,7 +107,7 @@ let get_device_list = function () {
             let deviceContent = createTableMeasurement(paramsData.device_id, paramsData.location, paramsData.state);
             $(deviceContent).appendTo(".measurements");
             let tableTitle = createColumnTitleMeasurement();
-            $(tableTitle).appendTo(".table." + paramsData.device_id);
+            $(tableTitle).appendTo(".superiorTable." + paramsData.device_id);
             $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
     });
