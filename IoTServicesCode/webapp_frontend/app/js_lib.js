@@ -38,11 +38,17 @@ function createTableMeasurement(Id, Location, State) {
 
 function createColumnTitleMeasurement(){
     let titleDate = createElement("div", ["titleCell", "date"], ["Measurements"]);
+    titleDate.style.display = "flex";
     titleDate.style.width = "50%";
+    titleDate.style.justifyContent = "center";
     let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
+    titleTemperature.style.display = "flex";
     titleTemperature.style.width = "25%";
+    titleTemperature.style.justifyContent = "center";
     let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
+    titleHumidity.style.display = "flex";
     titleHumidity.style.width = "25%";
+    titleHumidity.style.justifyContent = "center";
 
     let columnTitle = createElement("div", ["columnTitle"], [titleDate.outerHTML, titleTemperature.outerHTML, titleHumidity.outerHTML]);
     columnTitle.style.display = "flex";
@@ -52,7 +58,6 @@ function createColumnTitleMeasurement(){
     columnTitle.style.borderTop = "2px solid black";
     columnTitle.style.borderBottom = "2px solid black";
     columnTitle.style.alignItems = "center";
-    columnTitle.style.justifyContent = "center";
     columnTitle.style.fontWeight = "bold";
 
     return columnTitle;
@@ -79,6 +84,7 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
     columnMeasurements.style.height = "30px";
+    columnMeasurements.style.width = "100%";
     columnMeasurements.style.borderRight = "1px solid black";
     columnMeasurements.style.borderLeft = "1px solid black";
     columnMeasurements.style.borderTop = "1px solid black";
