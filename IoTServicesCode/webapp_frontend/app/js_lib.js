@@ -41,27 +41,26 @@ function createColumnTitleMeasurement(){
     titleDate.style.display = "flex";
     titleDate.style.width = "50%";
     titleDate.style.justifyContent = "center";
-    titleDate.style.alignContent = "center";
     titleDate.style.fontWeight = "bold";
     let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
     titleTemperature.style.display = "flex";
     titleTemperature.style.width = "25%";
     titleTemperature.style.justifyContent = "center";
-    titleTemperature.style.alignContent = "center";
     titleTemperature.style.fontWeight = "bold";
     let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
     titleHumidity.style.display = "flex";
     titleHumidity.style.width = "25%";
     titleHumidity.style.justifyContent = "center";
-    titleHumidity.style.alignContent = "center";
     titleHumidity.style.fontWeight = "bold";
 
     let columnTitle = createElement("div", ["columnTitle"], [titleDate.outerHTML, titleTemperature.outerHTML, titleHumidity.outerHTML]);
     columnTitle.style.display = "flex";
-    columnTitle.style.height = "30px";
-    columnTitle.style.borderRight = "1px solid black";
-    columnTitle.style.borderLeft = "1px solid black";
-    columnTitle.style.borderTop = "1px solid black";
+    columnTitle.style.height = "50px";
+    columnTitle.style.borderRight = "2px solid black";
+    columnTitle.style.borderLeft = "2px solid black";
+    columnTitle.style.borderTop = "2px solid black";
+    columnTitle.style.borderBottom = "2px solid black";
+    columnTitle.style.alignItems = "center";
 
     return columnTitle;
 }
@@ -72,18 +71,18 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     contentDate.style.borderRight = "1px solid black";
     contentDate.style.display = "flex";
     contentDate.style.justifyContent = "center";
-    contentDate.style.alignContent = "center";
+    contentDate.style.alignItems = "center";
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     contentTemperature.style.width = "25%";
     contentTemperature.style.borderRight = "1px solid black";
     contentTemperature.style.display = "flex";
     contentTemperature.style.justifyContent = "center";
-    contentTemperature.style.alignContent = "center";
+    contentTemperature.style.alignItems = "center";
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
     contentHumidity.style.width = "25%";
     contentHumidity.style.display = "flex";
     contentHumidity.style.justifyContent = "center";
-    contentHumidity.style.alignContent = "center";
+    contentHumidity.style.alignItems = "center";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
