@@ -39,14 +39,23 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     let contentDate = createElement("div", ["cell", "date"], [Date]);
     contentDate.style.width = "50%";
     contentDate.style.borderRight = "1px solid black";
+    contentDate.style.display = "flex";
+    contentDate.style.justifyContent = "center";
     let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
     contentTemperature.style.width = "25%";
     contentTemperature.style.borderRight = "1px solid black";
+    contentTemperature.style.display = "flex";
+    contentTemperature.style.justifyContent = "center";
     let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
     contentHumidity.style.width = "25%";
+    contentHumidity.style.display = "flex";
+    contentHumidity.style.justifyContent = "center";
 
     let columnMeasurements = createElement("div", ["columnMeasurements"], [contentDate.outerHTML, contentTemperature.outerHTML, contentHumidity.outerHTML]);
     columnMeasurements.style.display = "flex";
+    columnMeasurements.style.height = "30px";
+    columnMeasurements.style.borderRight = "1px solid black";
+    columnMeasurements.style.borderLeft = "1px solid black";
     columnMeasurements.style.borderTop = "1px solid black";
     return columnMeasurements;
 }
