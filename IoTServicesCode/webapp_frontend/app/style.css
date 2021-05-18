@@ -3,32 +3,33 @@
     padding: 10px;
 }
 
-.measurements > .device > .title{
+.measurements .device .title{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.measurements > .table{
+.measurements .table{
     display: flex;
     justify-content: center;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
 }
 
-.measurements > .table > .columnMeasurements {
+.columnMeasurements {
+    display: flex;
     border-top: 1px solid black;
     border-right: 1px solid black;
 }
 
-.measurements > .table > .columnMeasurements > .date {
+.columnMeasurements .date {
     width: 50%;
 }
 
-.measurements > .table > .columnMeasurements > .temperature {
+.columnMeasurements .temperature {
     width: 25%;
 }
 
-.measurements > .table > .columnMeasurements > .humidity {
+.columnMeasurements .humidity {
     width: 25%;
 }
