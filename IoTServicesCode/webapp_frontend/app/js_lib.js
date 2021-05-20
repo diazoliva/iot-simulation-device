@@ -35,7 +35,10 @@ function createTableMeasurement(Id, Location, State) {
     let superiorTable = createElement("div", ["superiorTableMeasurements", idClass], [table.outerHTML])
     superiorTable.style.marginTop = "10px";
     superiorTable.style.borderBottom = "1px solid black";
-    let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML]);
+    let buttonMeasurements = createElement("button", null, ["Return"])
+    buttonMeasurements.style.padding = "10px";
+    buttonMeasurements.onclick = function () {hideMeasurementsDevice(idClass)};
+    let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML, buttonMeasurements.outerHTML]);
     return deviceContent;
 }
 
