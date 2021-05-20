@@ -101,7 +101,6 @@ function getReadyMeasurements(Id, Location, State){
     let deviceContent = createTableMeasurement(Id, Location, State);
     $(deviceContent).appendTo(".measurements");
     let idClass = Id.replace(/\s/g, '');
-    document.getElementsByClassName("button " + idClass)[0].onclick = hideMeasurementsDevice(idClass);
     let tableTitle = createColumnTitleMeasurement();
     $(tableTitle).prependTo(".superiorTableMeasurements." + idClass);
 }
@@ -194,11 +193,10 @@ function createColumnDevices(Id, Location, State, Date){
     columnDevices.style.borderBottom = "1px solid black";
     columnDevices.style.alignItems = "center";
 
-    let buttonDevices = createElement("button", ["button", idClass], ["Measurements"]);
+    let buttonDevices = createElement("button", ["buttonMeasurement", idClass], ["Measurements"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
     buttonDevices.style.justifyContent = "center";
-    buttonDevices.addEventListener("click", showMeasurementsDevice(idClass));
 
     let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
     wholeColumnDevice.style.display = "flex";
@@ -235,6 +233,8 @@ let get_device_list = function () {
             hideMeasurements();
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
+            document.getElementsByClassName("button " + idClass)[0].addEventListener("click", hideMeasurementsDevice(idClass));
+            document.getElementsByClassName("buttonMeasurement " + idClass)[0].addEventListener("click", showMeasurementsDevice(idClass));
         }
     });
 }
