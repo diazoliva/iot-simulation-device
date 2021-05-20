@@ -141,7 +141,7 @@ function createColumnTitleDevices(){
     return wholeColumnTitle;
 }
 
-function createColumnDevices(Id, Location, State){
+function createColumnDevices(Id, Location, State, Date){
     let idClass = Id.replace(/\s/g, '');
     let contentId = createElement("div", ["cell", "id"], [Id]);
     contentId.style.width = "15%";
@@ -161,7 +161,7 @@ function createColumnDevices(Id, Location, State){
     contentLocation.style.display = "flex";
     contentLocation.style.justifyContent = "center";
     contentLocation.style.alignItems = "center";
-    let contentDate = createElement("div", ["cell", "lastDate"], ["Obteniendo fecha..."]);
+    let contentDate = createElement("div", ["cell", "lastDate"], [Date]);
     contentDate.style.width = "22.5%";
     contentDate.style.display = "flex";
     contentDate.style.justifyContent = "center";
@@ -202,9 +202,6 @@ let get_current_sensor_data = function () {
             let paramsData = data[i];
             let idClass = paramsData.device_id.replace(/\s/g, '');
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
-            if (i == data.length-1){
-                document.getElementsByClassName("columnDevice " + idClass)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
-            }
             $(columnMeasurements).appendTo(".tableMeasurements." + idClass);
         }
     });
@@ -216,7 +213,7 @@ let get_device_list = function () {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
-            let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state);
+            let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
         }
     });
