@@ -191,7 +191,7 @@ function createColumnDevices(Id, Location, State, Date){
     columnDevices.style.borderBottom = "1px solid black";
     columnDevices.style.alignItems = "center";
 
-    let buttonDevices = createElement("div", ["button", idClass], ["Measurements"]);
+    let buttonDevices = createElement("button", ["button", idClass], ["Measurements"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
     buttonDevices.style.justifyContent = "center";
