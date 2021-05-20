@@ -232,8 +232,8 @@ let get_device_list = function () {
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            if (paramsData.state == 0) paramsData.state = "Inactivo";
-            else paramsData.state = "Activo";
+            if (paramsData.state == 0) paramsData.state = "Inactive";
+            else paramsData.state = "Active";
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             hideMeasurements();
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
