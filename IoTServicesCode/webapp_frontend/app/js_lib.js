@@ -95,8 +95,8 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     return columnMeasurements;
 }
 
-function getReadyMeasurements(ID, Location, State){
-    let deviceContent = createTableMeasurement(ID, Location, State);
+function getReadyMeasurements(Id, Location, State){
+    let deviceContent = createTableMeasurement(Id, Location, State);
     $(deviceContent).appendTo(".measurements");
     let tableTitle = createColumnTitleMeasurement();
     let idClass = Id.replace(/\s/g, '');
