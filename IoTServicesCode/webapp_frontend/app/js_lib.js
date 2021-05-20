@@ -135,7 +135,7 @@ let get_current_sensor_data = function () {
 let get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
         // $(".tableDevices").empty();
-        getReadyDevices(paramsData.device_id, paramsData.location, paramsData.state);
+        getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
