@@ -108,16 +108,19 @@ function createColumnTitleDevices(){
     let titleDate = createElement("div", ["titleDeviceCellDate"], ["Date"]);
 
     let columnTitle = createElement("div", ["columnTitleDevice"], [titleDevice.outerHTML, titleState.outerHTML, titleLocation.outerHTML, titleDate.outerHTML]);
+    columnTitle.style.width = "90%";
+    let buttonTitle = createElement("button", null, null);
+    buttonTitle.style.width = "10%";
     return columnTitle;
 }
 
 function createColumnDevices(Id, Location, State){
-
+ return;
 }
 
 function getReadyDevices(){
     let devicesColumnTitle = createColumnTitleDevices();
-    $(devicesColumnTitle).appendTo(".tableDevices");
+    $(devicesColumnTitle).appendTo(".device_list");
 }
 
 let server_address = "http://35.241.218.104:5000/"
