@@ -195,7 +195,7 @@ function createColumnDevices(Id, Location, State, Date){
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
     buttonDevices.style.justifyContent = "center";
-    buttonDevices.onclick = showMeasurementsDevice(idClass);
+    buttonDevices.onclick = function() {showMeasurementsDevice(idClass)};
 
     let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
     wholeColumnDevice.style.display = "flex";
