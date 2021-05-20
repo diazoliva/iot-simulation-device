@@ -31,7 +31,7 @@ def devices_retriever():
     mydb = connect_database()
     r = []
     with mydb.cursor() as mycursor:
-        query = "SELECT device_id, location, state, date FROM info_device ORDER BY id DESC;"
+        query = "SELECT device_id, location, state, date FROM info_device;"
         mycursor.execute(query)
         myresult = mycursor.fetchall()
         for device_id, location, state, date in myresult:
