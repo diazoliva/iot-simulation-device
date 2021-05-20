@@ -37,8 +37,8 @@ function createTableMeasurement(Id, Location, State) {
     superiorTable.style.borderBottom = "1px solid black";
     let buttonMeasurements = createElement("button", null, ["Return"])
     buttonMeasurements.style.padding = "10px";
-    buttonMeasurements.addEventListener("click", hideMeasurementsDevice(idClass));
     let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML, buttonMeasurements.outerHTML]);
+    buttonMeasurements.addEventListener("click", hideMeasurementsDevice(idClass));
     return deviceContent;
 }
 
@@ -231,8 +231,8 @@ let get_device_list = function () {
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            hideMeasurements();
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
+            hideMeasurements();
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
         }
