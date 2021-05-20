@@ -133,11 +133,55 @@ function createColumnTitleDevices(){
     buttonTitle.style.width = "9%";
     buttonTitle.style.marginLeft = "7px";
     let wholeColumnTitle = createElement("div", null, [columnTitle.outerHTML, buttonTitle.outerHTML]);
+    wholeColumnTitle.style.display = "flex";
+    wholeColumnTitle.style.alignItems = "center";
     return wholeColumnTitle;
 }
 
 function createColumnDevices(Id, Location, State){
- return;
+    let contentId = createElement("div", ["cell", "id"], [Id]);
+    contentId.style.width = "15%";
+    contentId.style.borderRight = "1px solid black";
+    contentId.style.display = "flex";
+    contentId.style.justifyContent = "center";
+    contentId.style.alignItems = "center";
+    let contentState = createElement("div", ["cell", "state"], [State]);
+    contentState.style.width = "12.5%";
+    contentState.style.borderRight = "1px solid black";
+    contentState.style.display = "flex";
+    contentState.style.justifyContent = "center";
+    contentState.style.alignItems = "center";
+    let contentLocation = createElement("div", ["cell", "location"], [Location]);
+    contentLocation.style.width = "50%";
+    contentLocation.style.borderRight = "1px solid black";
+    contentLocation.style.display = "flex";
+    contentLocation.style.justifyContent = "center";
+    contentLocation.style.alignItems = "center";
+    let contentDate = createElement("div", ["cell", "lastDate"], ["24/03/25"]);
+    contentLocation.style.width = "22.5%";
+    contentLocation.style.borderRight = "1px solid black";
+    contentLocation.style.display = "flex";
+    contentLocation.style.justifyContent = "center";
+    contentLocation.style.alignItems = "center";
+
+    let columnDevices = createElement("div", ["columnMeasurements"], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
+    columnDevices.style.display = "flex";
+    columnDevices.style.height = "30px";
+    columnDevices.style.width = "90%";
+    columnDevices.style.borderRight = "1px solid black";
+    columnDevices.style.borderLeft = "1px solid black";
+    columnDevices.style.borderTop = "1px solid black";
+    columnDevices.style.alignItems = "center";
+
+    let buttonDevices = createElement("div", ["button", Id], null);
+    buttonDevices.style.width = "9%";
+    buttonDevices.style.marginLeft = "7px";
+
+    let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
+    wholeColumnDevice.style.display = "flex";
+    wholeColumnDevice.style.alignItems = "center";
+
+    return wholeColumnDevice;
 }
 
 function getReadyDevices(){
