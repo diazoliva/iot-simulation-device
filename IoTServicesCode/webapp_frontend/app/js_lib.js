@@ -142,12 +142,12 @@ function createColumnTitleDevices(){
 }
 
 function hideMeasurements() {
-    document.getElementsByClassName("device " + idClass)[0].style.display = "none";
     document.getElementsByClassName("allMeasurements")[0].style.display = "none";
+    document.getElementsByClassName("allDevices")[0].style.display = "block";
 }
 function hideMeasurementsDevice(idClass){
     hideMeasurements();
-    document.getElementsByClassName("allDevices")[0].style.display = "block";
+    document.getElementsByClassName("device " + idClass)[0].style.display = "none";
 }
 
 function showMeasurementsDevice(idClass){
