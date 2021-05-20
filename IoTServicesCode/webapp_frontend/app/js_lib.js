@@ -19,6 +19,7 @@ function createElement(Type, ClassName, Content) {
 
 
 function createTableMeasurement(Id, Location, State) {
+    let idClass = Id.replace(/\s/g, '');
     let reference_device = createElement("p", ["titleReference"],["Device:"]);
     reference_device.style.paddingRight = "7.5px";
     let device_id = createElement("p", ["title, id"], [Id]);
@@ -28,13 +29,13 @@ function createTableMeasurement(Id, Location, State) {
     let state = createElement("p", ["titleState"], [State]);
 
     let title = createElement("div", ["title"], [reference_device.outerHTML, device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML]);
-    let table = createElement("div", ["tableMeasurements", Id], null);
+    let table = createElement("div", ["tableMeasurements", idClass], null);
     table.style.borderLeft = "1px solid black";
     table.style.borderRight = "1px solid black";
-    let superiorTable = createElement("div", ["superiorTableMeasurements", Id], [table.outerHTML])
+    let superiorTable = createElement("div", ["superiorTableMeasurements", idClass], [table.outerHTML])
     superiorTable.style.marginTop = "10px";
     superiorTable.style.borderBottom = "1px solid black";
-    let deviceContent = createElement("div", ["device", Id], [title.outerHTML, superiorTable.outerHTML]);
+    let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML]);
     return deviceContent;
 }
 
@@ -140,6 +141,7 @@ function createColumnTitleDevices(){
 }
 
 function createColumnDevices(Id, Location, State){
+    let idClass = Id.replace(/\s/g, '');
     let contentId = createElement("div", ["cell", "id"], [Id]);
     contentId.style.width = "15%";
     contentId.style.borderRight = "1px solid black";
@@ -164,7 +166,7 @@ function createColumnDevices(Id, Location, State){
     contentDate.style.justifyContent = "center";
     contentDate.style.alignItems = "center";
 
-    let columnDevices = createElement("div", ["columnDevice", Id], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
+    let columnDevices = createElement("div", ["columnDevice", idClass], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
     columnDevices.style.display = "flex";
     columnDevices.style.height = "30px";
     columnDevices.style.width = "90%";
@@ -173,7 +175,7 @@ function createColumnDevices(Id, Location, State){
     columnDevices.style.borderBottom = "1px solid black";
     columnDevices.style.alignItems = "center";
 
-    let buttonDevices = createElement("div", ["button", Id], ["Measurements"]);
+    let buttonDevices = createElement("div", ["button", idClass], ["Measurements"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
     buttonDevices.style.justifyContent = "center";
@@ -197,8 +199,11 @@ let get_current_sensor_data = function () {
         $(".tableMeasurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
+            let idClass = Id.replace(/\s/g, '');
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
-            document.getElementsByClassName("columnDevice " + paramsData.device_id)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
+            if (i == data.length-1){
+                document.getElementsByClassName("columnDevice " + idClass)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
+            }
             $(columnMeasurements).appendTo(".tableMeasurements." + paramsData.device_id);
         }
     });
@@ -209,7 +214,7 @@ let get_device_list = function () {
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
+            getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state);
             $(columnDevices).appendTo(".table_devices");
         }

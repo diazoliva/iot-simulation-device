@@ -17,8 +17,8 @@ def connect_database():
 def devices_register(params):
     mydb = connect_database()
     with mydb.cursor() as mycursor:
-        query = "INSERT INTO state_device (device_id, location, state) VALUES (%s, %s, %s);"
-        device_info = (params["device_id"], params["location"], params["state"])
+        query = "INSERT INTO state_device (device_id, location, state, date) VALUES (%s, %s, %s, %s);"
+        device_info = (params["device_id"], params["location"], params["state"], params["date"])
         try:
             mycursor.execute(query, device_info)
             mydb.commit()
@@ -31,11 +31,11 @@ def devices_retriever():
     mydb = connect_database()
     r = []
     with mydb.cursor() as mycursor:
-        query = "SELECT device_id, location, state FROM state_device ORDER BY id DESC;"
+        query = "SELECT device_id, location, state, date FROM state_device ORDER BY id DESC;"
         mycursor.execute(query)
         myresult = mycursor.fetchall()
-        for device_id, location, state in myresult:
-            r.append({"device_id": device_id, "location": location, "state": state})
+        for device_id, location, state, date in myresult:
+            r.append({"device_id": device_id, "location": location, "state": state, "date": date})
         mydb.commit()
 
     result = json.dumps(r, sort_keys=True)
