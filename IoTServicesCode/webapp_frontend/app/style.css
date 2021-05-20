@@ -3,6 +3,10 @@
     padding: 10px;
 }
 
+.device_list {
+    padding: 10px;
+}
+
 .measurements .device .title{
     display: flex;
     justify-content: center;

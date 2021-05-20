@@ -103,14 +103,35 @@ function getReadyMeasurements(ID, Location, State){
 
 function createColumnTitleDevices(){
     let titleDevice = createElement("div", ["titleDeviceCellDevice"], ["Device"]);
+    titleDevice.style.display = "flex";
+    titleDevice.style.width = "15%";
+    titleDevice.style.justifyContent = "center";
     let titleState = createElement("div", ["titleDeviceCellState"], ["State"]);
+    titleState.style.display = "flex";
+    titleState.style.width = "12.5%";
+    titleState.style.justifyContent = "center";
     let titleLocation = createElement("div", ["titleDeviceCellLocation"], ["Location"]);
+    titleLocation.style.display = "flex";
+    titleLocation.style.width = "50%";
+    titleLocation.style.justifyContent = "center";
     let titleDate = createElement("div", ["titleDeviceCellDate"], ["Date"]);
+    titleDate.style.display = "flex";
+    titleDate.style.width = "22.5%";
+    titleDate.style.justifyContent = "center";
 
     let columnTitle = createElement("div", ["columnTitleDevice"], [titleDevice.outerHTML, titleState.outerHTML, titleLocation.outerHTML, titleDate.outerHTML]);
+    columnTitle.style.display = "flex";
     columnTitle.style.width = "90%";
+    columnTitle.style.height = "50px";
+    columnTitle.style.borderRight = "2px solid black";
+    columnTitle.style.borderLeft = "2px solid black";
+    columnTitle.style.borderTop = "2px solid black";
+    columnTitle.style.borderBottom = "2px solid black";
+    columnTitle.style.alignItems = "center";
+    columnTitle.style.fontWeight = "bold";
     let buttonTitle = createElement("button", null, null);
-    buttonTitle.style.width = "10%";
+    buttonTitle.style.width = "9%";
+    buttonTitle.style.marginLeft = "7px";
     return columnTitle;
 }
 
