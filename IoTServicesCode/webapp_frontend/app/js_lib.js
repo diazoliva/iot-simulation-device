@@ -123,7 +123,7 @@ function getReadyDevices(){
 let server_address = "http://35.241.218.104:5000/"
 let get_current_sensor_data = function () {
     $.getJSON(server_address + "dso/measurements/", function (data) {
-        $(".tableDevices").empty();
+        $(".tableMeasurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
