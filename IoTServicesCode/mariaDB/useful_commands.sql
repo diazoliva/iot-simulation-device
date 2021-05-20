@@ -26,7 +26,7 @@ SELECT temperature, humidity FROM sensor_data ORDER BY id DESC LIMIT 1;
 CREATE TABLE info_device(
     device_id varchar(50) NOT NULL,
     location varchar(100) NOT NULL,
-    state BOOLEAN NOT NULL,
+    state varchar(10) NOT NULL,
     date varchar(50) NOT NULL,
     PRIMARY KEY (device_id)
 );
