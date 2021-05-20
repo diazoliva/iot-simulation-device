@@ -36,7 +36,8 @@ def measurements_retriever():
         myresult = mycursor.fetchall()
         for device_id, temperature, humidity, date_measurement in myresult:
             r.append(
-                {"device_id": device_id, "temperature": temperature, "humidity": humidity, "date": str(date_measurement)})
+                {"device_id": device_id, "temperature": temperature, "humidity": humidity,
+                 "date": str(date_measurement)})
         mydb.commit()
 
     result = json.dumps(r, sort_keys=True)

@@ -3,40 +3,30 @@ import paho.mqtt.client as mqtt
 from measurement_register_interface import *
 from device_register_interface import *
 import os
-
-# global vars definition
-current_temperature = 0
-current_humidity = 0
+from getInfoJson import *
 
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected successfully")
-        client.subscribe("/uc3m/classrooms/leganes/myclass/+")
+        client.subscribe("/uc3m/classrooms/leganes/myclass/device/#")
     else:
         print("Connection fail with code: ", {rc})
 
 
 def on_message(client, userdata, message):
-    global current_temperature, current_humidity
-    print("Received message: ", str(message.payload.decode("utf-8")))
-    if message.topic == "/uc3m/classrooms/leganes/myclass/temperature":
-        current_temperature = float(message.payload.decode("utf-8"))
-        data = {"temperature": current_temperature, "humidity": current_humidity}
-        submit_data_to_store(data)
-        print("Data sent: ", data)
+    if message.topic == "/uc3m/classrooms/leganes/myclass/device/#":
+        if message.topic == "/uc3m/classrooms/leganes/myclass/device/measurements/+":
+            info = generate_info_json(message)
+            submit_device_info_to_store(info)
+            print("Info sent: ", info)
 
-    elif message.topic == "/uc3m/classrooms/leganes/myclass/humidity":
-        current_humidity = float(message.payload.decode("utf-8"))
-        data = {"temperature": current_temperature, "humidity": current_humidity}
-        submit_data_to_store(data)
-        print("Data sent: ", data)
+        if message.topic == "/uc3m/classrooms/leganes/myclass/device/info/+":
+            data = generate_data_json(message)
+            submit_data_to_store(data)
+            print("Data sent: ", data)
 
-    elif message.topic == "/uc3m/classrooms/leganes/myclass/device_info":
-        r = message.payload.decode("utf-8")
-        data = {"device": r}
-        submit_device_info_to_store(data)
-        print(data)
+        print("Received message: ", str(message.payload.decode("utf-8")))
 
 
 # Getting client info
