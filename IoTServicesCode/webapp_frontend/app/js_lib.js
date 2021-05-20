@@ -173,9 +173,10 @@ function createColumnDevices(Id, Location, State){
     columnDevices.style.borderTop = "1px solid black";
     columnDevices.style.alignItems = "center";
 
-    let buttonDevices = createElement("div", ["button", Id], ["Medidas"]);
+    let buttonDevices = createElement("div", ["button", Id], ["Measurements"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
+    buttonDevices.style.justifyContent = "center";
 
     let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
     wholeColumnDevice.style.display = "flex";
@@ -187,6 +188,9 @@ function createColumnDevices(Id, Location, State){
 function getReadyDevices(){
     let devicesColumnTitle = createColumnTitleDevices();
     $(devicesColumnTitle).prependTo(".device_list");
+    document.getElementsByClassName("table_devices")[0].style.borderLeft = "1px solid black";
+    document.getElementsByClassName("table_devices")[0].style.borderRight = "1px solid black";
+    document.getElementsByClassName("table_devices")[0].style.borderBottom = "1px solid black";
 }
 
 let server_address = "http://35.241.218.104:5000/"
