@@ -234,8 +234,8 @@ let get_device_list = function () {
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
             let idClass = paramsData.device_id.replace(/\s/g, '');
-            document.getElementsByClassName("button " + idClass)[0].addEventListener("click", hideMeasurementsDevice(idClass));
-            document.getElementsByClassName("buttonMeasurement " + idClass)[0].addEventListener("click", showMeasurementsDevice(idClass));
+            document.getElementsByClassName("button " + idClass)[0].addEventListener("click", alert('hello'));
+            document.getElementsByClassName("buttonMeasurement " + idClass)[0].addEventListener("click", hideMeasurementsDevice(idClass));
         }
     });
 }
