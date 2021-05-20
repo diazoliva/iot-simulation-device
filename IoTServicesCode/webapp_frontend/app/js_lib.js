@@ -131,7 +131,8 @@ function createColumnTitleDevices(){
     columnTitle.style.fontWeight = "bold";
     let buttonTitle = createElement("button", null, null);
     buttonTitle.style.width = "9%";
-    buttonTitle.style.marginLeft = "7px";
+    buttonTitle.style.marginLeft = "7px";;
+    buttonTitle.style.display = "none";
     let wholeColumnTitle = createElement("div", null, [columnTitle.outerHTML, buttonTitle.outerHTML]);
     wholeColumnTitle.style.display = "flex";
     wholeColumnTitle.style.alignItems = "center";
@@ -168,9 +169,9 @@ function createColumnDevices(Id, Location, State){
     columnDevices.style.display = "flex";
     columnDevices.style.height = "30px";
     columnDevices.style.width = "90%";
-    columnDevices.style.borderRight = "1px solid black";
+    columnDevices.style.borderRight = "2px solid black";
     columnDevices.style.borderLeft = "1px solid black";
-    columnDevices.style.borderTop = "1px solid black";
+    columnDevices.style.borderBottom = "1px solid black";
     columnDevices.style.alignItems = "center";
 
     let buttonDevices = createElement("div", ["button", Id], ["Measurements"]);
@@ -189,8 +190,6 @@ function getReadyDevices(){
     let devicesColumnTitle = createColumnTitleDevices();
     $(devicesColumnTitle).prependTo(".device_list");
     document.getElementsByClassName("table_devices")[0].style.borderLeft = "1px solid black";
-    document.getElementsByClassName("table_devices")[0].style.borderRight = "1px solid black";
-    document.getElementsByClassName("table_devices")[0].style.borderBottom = "1px solid black";
 }
 
 let server_address = "http://35.241.218.104:5000/"
