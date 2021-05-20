@@ -35,10 +35,9 @@ function createTableMeasurement(Id, Location, State) {
     let superiorTable = createElement("div", ["superiorTableMeasurements", idClass], [table.outerHTML])
     superiorTable.style.marginTop = "10px";
     superiorTable.style.borderBottom = "1px solid black";
-    let buttonMeasurements = createElement("button", null, ["Return"])
+    let buttonMeasurements = createElement("button", ["button", idClass], ["Return"])
     buttonMeasurements.style.padding = "10px";
     let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML, buttonMeasurements.outerHTML]);
-    buttonMeasurements.addEventListener("click", hideMeasurementsDevice(idClass));
     return deviceContent;
 }
 
@@ -101,8 +100,9 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
 function getReadyMeasurements(Id, Location, State){
     let deviceContent = createTableMeasurement(Id, Location, State);
     $(deviceContent).appendTo(".measurements");
-    let tableTitle = createColumnTitleMeasurement();
     let idClass = Id.replace(/\s/g, '');
+    document.getElementsByClassName("button " + idClass)[0].addEventListener("click", hideMeasurementsDevice(idClass));
+    let tableTitle = createColumnTitleMeasurement();
     $(tableTitle).prependTo(".superiorTableMeasurements." + idClass);
 }
 
