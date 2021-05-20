@@ -28,7 +28,7 @@ CREATE TABLE state_device(
     device_id varchar(50) NOT NULL,
     location varchar(100) NOT NULL,
     state BOOLEAN NOT NULL,
-    date_connection varchar(50) NOT NULL,
+    date varchar(50) NOT NULL,
     UNIQUE (device_id),
     PRIMARY KEY (id)
 );

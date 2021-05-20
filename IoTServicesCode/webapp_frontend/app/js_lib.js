@@ -199,7 +199,7 @@ let get_current_sensor_data = function () {
         $(".tableMeasurements").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let idClass = Id.replace(/\s/g, '');
+            let idClass = paramsData.device_id.replace(/\s/g, '');
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
             if (i == data.length-1){
                 document.getElementsByClassName("columnDevice " + idClass)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
