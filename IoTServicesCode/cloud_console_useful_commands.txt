@@ -2,3 +2,26 @@ docker-compose build
 docker-compose up -d
 docker exec -it iotservicescode_webapp_backend_1 /bin/bash
 docker exec -it iotservicescode_mariaDB_1 /bin/bash
+
+
+docker container run -d --name quotes alpine
+docker container start quotes
+docker container stop <container_name_id>
+docker container inspect -f "{{json .State}}" <container_name_id> | jq
+# -f forces to remove the container
+docker container rm -f $(docker container ls -a -q)
+
+
+# Inside docker
+/ # apk update && apk add iputils
+
+# See what changed from the base image
+docker container diff sample
+
+# See how an image has been built
+docker image history my-alpine
+
+# Create lower-size image
+FROM alpine:3.7
+COPY --from=build /app/bin/hello /app/hello
+CMD /app/hello

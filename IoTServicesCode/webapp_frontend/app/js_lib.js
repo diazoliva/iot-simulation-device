@@ -21,15 +21,17 @@ function createElement(Type, ClassName, Content) {
 function createTableMeasurement(Id, Location, State) {
     let reference_device = createElement("p", ["titleReference"],["Device:"]);
     reference_device.style.paddingRight = "7.5px";
-    let device_id = createElement("p", ["titleId"], [Id]);
-    let underscore = createElement("p", ["titleUnderscore"], ["-"]);
+    let device_id = createElement("p", ["title, id"], [Id]);
+    let underscore = createElement("p", ["title, underscore"], ["-"]);
     underscore.style.padding = "0 10px";
-    let location = createElement("p", ["titleLocation"], [Location]);
+    let location = createElement("p", ["title, location"], [Location]);
     let state = createElement("p", ["titleState"], [State]);
 
     let title = createElement("div", ["title"], [reference_device.outerHTML, device_id.outerHTML, underscore.outerHTML, state.outerHTML, underscore.outerHTML, location.outerHTML]);
-    let table = createElement("div", ["table", Id], null);
-    let superiorTable = createElement("div", ["superiorTable", Id], [table.outerHTML])
+    let table = createElement("div", ["tableMeasurements", Id], null);
+    table.style.borderLeft = "1px solid black";
+    table.style.borderRight = "1px solid black";
+    let superiorTable = createElement("div", ["superiorTableMeasurements", Id], [table.outerHTML])
     superiorTable.style.marginTop = "10px";
     superiorTable.style.borderBottom = "1px solid black";
     let deviceContent = createElement("div", ["device", Id], [title.outerHTML, superiorTable.outerHTML]);
@@ -37,15 +39,15 @@ function createTableMeasurement(Id, Location, State) {
 }
 
 function createColumnTitleMeasurement(){
-    let titleDate = createElement("div", ["titleCell", "date"], ["Measurements"]);
+    let titleDate = createElement("div", ["titleCellDate"], ["Measurements"]);
     titleDate.style.display = "flex";
     titleDate.style.width = "50%";
     titleDate.style.justifyContent = "center";
-    let titleTemperature = createElement("div", ["titleCell", "date"], ["Temperature"]);
+    let titleTemperature = createElement("div", ["titleCellTemperature"], ["Temperature"]);
     titleTemperature.style.display = "flex";
     titleTemperature.style.width = "25%";
     titleTemperature.style.justifyContent = "center";
-    let titleHumidity = createElement("div", ["titleCell", "date"], ["Humidity"]);
+    let titleHumidity = createElement("div", ["titleCellHumidity"], ["Humidity"]);
     titleHumidity.style.display = "flex";
     titleHumidity.style.width = "25%";
     titleHumidity.style.justifyContent = "center";
@@ -92,33 +94,57 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     return columnMeasurements;
 }
 
+function getReadyMeasurements(ID, Location, State){
+    let deviceContent = createTableMeasurement(ID, Location, State);
+    $(deviceContent).appendTo(".measurements");
+    let tableTitle = createColumnTitleMeasurement();
+    $(tableTitle).prependTo(".superiorTableMeasurements." + ID);
+}
 
+function createColumnTitleDevices(){
+    let titleDevice = createElement("div", ["titleDeviceCellDevice"], ["Device"]);
+    let titleState = createElement("div", ["titleDeviceCellState"], ["State"]);
+    let titleLocation = createElement("div", ["titleDeviceCellLocation"], ["Location"]);
+    let titleDate = createElement("div", ["titleDeviceCellDate"], ["Date"]);
 
+    let columnTitle = createElement("div", ["columnTitleDevice"], [titleDevice.outerHTML, titleState.outerHTML, titleLocation.outerHTML, titleDate.outerHTML]);
+    return columnTitle;
+}
 
-let server_address = "http://34.76.11.68:5000/"
+function createColumnDevices(Id, Location, State){
+
+}
+
+function getReadyDevices(){
+    let devicesColumnTitle = createColumnTitleDevices();
+    $(devicesColumnTitle).appendTo(".tableDevices");
+}
+
+let server_address = "http://35.241.218.104:5000/"
 let get_current_sensor_data = function () {
     $.getJSON(server_address + "dso/measurements/", function (data) {
-        $(".table").empty();
+        $(".tableDevices").empty();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
-            $(columnMeasurements).appendTo(".table." + paramsData.device_id);
+            $(columnMeasurements).appendTo(".tableMeasurements." + paramsData.device_id);
         }
     });
 }
 
 let get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
+        // $(".tableDevices").empty();
+        getReadyDevices(paramsData.device_id, paramsData.location, paramsData.state);
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            let deviceContent = createTableMeasurement(paramsData.device_id, paramsData.location, paramsData.state);
-            $(deviceContent).appendTo(".measurements");
-            let tableTitle = createColumnTitleMeasurement();
-            $(tableTitle).prependTo(".superiorTable." + paramsData.device_id);
+            getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
+            let columnDevices = createColumnDevices();
             $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
         }
     });
 }
+
 
 get_device_list();
 setInterval(get_current_sensor_data, 2000);

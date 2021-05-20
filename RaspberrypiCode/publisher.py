@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import time
-import os
+from load_preferences import getPreferences
+
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
@@ -10,18 +11,14 @@ def on_connect(client, userdata, flags, rc):
 
 
 client = mqtt.Client()
+params = getPreferences("conf.yaml")
 
 
 def make_connection():
-    myhost = os.getenv('BROKER_ADDRESS')
-    myport = int(os.getenv('BROKER_PORT'))
-    myuser = os.getenv('BROKER_USER')
-    mypassword = os.getenv('BROKER_PWD')
-    mykeepalive = int(os.getenv('BROKER_KEEP_ALIVE'))
-    client.username_pw_set(username=myuser, password=mypassword)
+    client.username_pw_set(username=params["broker_user"], password=params["broker_pwd"])
     client.on_connect = on_connect
     client.will_set('/uc3m/classrooms/leganes/myclass/device_info', '{"status":"Off"}')
-    client.connect(myhost, myport, mykeepalive)
+    client.connect(params["broker_address"], params["broker_port"], params["broker_keep_alive"])
 
 
 def send_temperature(temperature):
