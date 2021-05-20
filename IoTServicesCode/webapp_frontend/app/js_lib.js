@@ -99,7 +99,8 @@ function getReadyMeasurements(ID, Location, State){
     let deviceContent = createTableMeasurement(ID, Location, State);
     $(deviceContent).appendTo(".measurements");
     let tableTitle = createColumnTitleMeasurement();
-    $(tableTitle).prependTo(".superiorTableMeasurements." + ID);
+    let idClass = Id.replace(/\s/g, '');
+    $(tableTitle).prependTo(".superiorTableMeasurements." + idClass);
 }
 
 function createColumnTitleDevices(){
