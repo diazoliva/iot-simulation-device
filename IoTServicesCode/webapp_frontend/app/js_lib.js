@@ -204,7 +204,7 @@ let get_current_sensor_data = function () {
             if (i == data.length-1){
                 document.getElementsByClassName("columnDevice " + idClass)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
             }
-            $(columnMeasurements).appendTo(".tableMeasurements." + paramsData.device_id);
+            $(columnMeasurements).appendTo(".tableMeasurements." + idClass);
         }
     });
 }
