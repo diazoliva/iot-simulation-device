@@ -73,13 +73,13 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     contentDate.style.display = "flex";
     contentDate.style.justifyContent = "center";
     contentDate.style.alignItems = "center";
-    let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature]);
+    let contentTemperature = createElement("div", ["cell", "temperature"], [Temperature + " C"]);
     contentTemperature.style.width = "25%";
     contentTemperature.style.borderRight = "1px solid black";
     contentTemperature.style.display = "flex";
     contentTemperature.style.justifyContent = "center";
     contentTemperature.style.alignItems = "center";
-    let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity]);
+    let contentHumidity = createElement("div", ["cell", "humidity"], [Humidity + " %"]);
     contentHumidity.style.width = "25%";
     contentHumidity.style.display = "flex";
     contentHumidity.style.justifyContent = "center";
@@ -141,6 +141,21 @@ function createColumnTitleDevices(){
     return wholeColumnTitle;
 }
 
+function hideMeasurements() {
+    document.getElementsByClassName("device " + idClass)[0].style.display = "none";
+    document.getElementsByClassName("allMeasurements")[0].style.display = "none";
+}
+function hideMeasurementsDevice(idClass){
+    hideMeasurements();
+    document.getElementsByClassName("allDevices")[0].style.display = "block";
+}
+
+function showMeasurementsDevice(idClass){
+    document.getElementsByClassName("allMeasurements")[0].style.display = "block";
+    document.getElementsByClassName("device " + idClass)[0].style.display = "block";
+    document.getElementsByClassName("allDevices")[0].style.display = "none";
+}
+
 function createColumnDevices(Id, Location, State, Date){
     let idClass = Id.replace(/\s/g, '');
     let contentId = createElement("div", ["cell", "id"], [Id]);
@@ -180,6 +195,7 @@ function createColumnDevices(Id, Location, State, Date){
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
     buttonDevices.style.justifyContent = "center";
+    buttonDevices.onclick = showMeasurementsDevice(idClass);
 
     let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
     wholeColumnDevice.style.display = "flex";
@@ -212,6 +228,7 @@ let get_device_list = function () {
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
+            hideMeasurements();
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
