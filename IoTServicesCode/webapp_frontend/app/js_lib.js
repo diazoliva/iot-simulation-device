@@ -235,10 +235,10 @@ let get_device_list = function () {
             $(columnDevices).appendTo(".table_devices");
             let idClass = paramsData.device_id.replace(/\s/g, '');
             $(".button." + idClass).click(function(){
-                showMeasurementsDevice();
+                showMeasurementsDevice(idClass);
             });
             $(".buttonMeasurement." + idClass).click(function(){
-                hideMeasurementsDevice();
+                hideMeasurementsDevice(idClass);
             });
         }
     });
