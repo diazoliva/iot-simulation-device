@@ -132,7 +132,8 @@ function createColumnTitleDevices(){
     let buttonTitle = createElement("button", null, null);
     buttonTitle.style.width = "9%";
     buttonTitle.style.marginLeft = "7px";
-    return columnTitle;
+    let wholeColumnTitle = createElement("div", null, [columnTitle.outerHTML, buttonTitle.outerHTML]);
+    return wholeColumnTitle;
 }
 
 function createColumnDevices(Id, Location, State){
