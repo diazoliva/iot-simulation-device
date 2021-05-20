@@ -17,8 +17,8 @@ def connect_database():
 def devices_register(params):
     mydb = connect_database()
     with mydb.cursor() as mycursor:
-        query = "INSERT INTO info_device (device_id, location, state, date) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE location=location AND state=state AND date=date;"
-        device_info = (params["device_id"], params["location"], params["state"], params["date"])
+        query = "INSERT INTO info_device (device_id, location, state, date) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE location=%s,state=%s, date=%s;"
+        device_info = (params["device_id"], params["location"], params["state"], params["date"], params["location"], params["state"], params["date"])
         try:
             mycursor.execute(query, device_info)
             mydb.commit()
