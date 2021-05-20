@@ -154,6 +154,7 @@ function hideMeasurementsDevice(idClass){
 
 function showMeasurementsDevice(idClass){
     document.getElementsByClassName("allMeasurements")[0].style.display = "block";
+    alert(document.getElementsByClassName("allMeasurements")[0].textContent);
     document.getElementsByClassName("device " + idClass)[0].style.display = "block";
     document.getElementsByClassName("allDevices")[0].style.display = "none";
 }
