@@ -158,13 +158,13 @@ function createColumnDevices(Id, Location, State){
     contentLocation.style.justifyContent = "center";
     contentLocation.style.alignItems = "center";
     let contentDate = createElement("div", ["cell", "lastDate"], ["24/03/25"]);
-    contentLocation.style.width = "22.5%";
-    contentLocation.style.borderRight = "1px solid black";
-    contentLocation.style.display = "flex";
-    contentLocation.style.justifyContent = "center";
-    contentLocation.style.alignItems = "center";
+    contentDate.style.width = "22.5%";
+    contentDate.style.borderRight = "1px solid black";
+    contentDate.style.display = "flex";
+    contentDate.style.justifyContent = "center";
+    contentDate.style.alignItems = "center";
 
-    let columnDevices = createElement("div", ["columnMeasurements"], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
+    let columnDevices = createElement("div", ["columnDevices"], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
     columnDevices.style.display = "flex";
     columnDevices.style.height = "30px";
     columnDevices.style.width = "90%";
@@ -173,7 +173,7 @@ function createColumnDevices(Id, Location, State){
     columnDevices.style.borderTop = "1px solid black";
     columnDevices.style.alignItems = "center";
 
-    let buttonDevices = createElement("div", ["button", Id], null);
+    let buttonDevices = createElement("div", ["button", Id], ["Medidas"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
 
@@ -207,7 +207,7 @@ let get_device_list = function () {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
-            let columnDevices = createColumnDevices();
+            let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state);
             $(columnDevices).appendTo(".table_devices");
         }
     });
