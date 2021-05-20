@@ -37,7 +37,7 @@ function createTableMeasurement(Id, Location, State) {
     superiorTable.style.borderBottom = "1px solid black";
     let buttonMeasurements = createElement("button", null, ["Return"])
     buttonMeasurements.style.padding = "10px";
-    buttonMeasurements.onclick = function () {hideMeasurementsDevice(idClass)};
+    buttonMeasurements.addEventListener("click", hideMeasurementsDevice(idClass));
     let deviceContent = createElement("div", ["device", idClass], [title.outerHTML, superiorTable.outerHTML, buttonMeasurements.outerHTML]);
     return deviceContent;
 }
@@ -197,8 +197,8 @@ function createColumnDevices(Id, Location, State, Date){
     let buttonDevices = createElement("button", ["button", idClass], ["Measurements"]);
     buttonDevices.style.width = "9%";
     buttonDevices.style.marginLeft = "7px";
-    buttonDevices.style.justifyContent = "center";
-    buttonDevices.onclick = function() {showMeasurementsDevice(idClass)};
+    buttonDevices.style.justifyContent = "center";;
+    buttonDevices.addEventListener("click", showMeasurementsDevice(idClass));
 
     let wholeColumnDevice = createElement("div", null, [columnDevices.outerHTML, buttonDevices.outerHTML]);
     wholeColumnDevice.style.display = "flex";
