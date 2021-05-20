@@ -158,14 +158,13 @@ function createColumnDevices(Id, Location, State){
     contentLocation.style.display = "flex";
     contentLocation.style.justifyContent = "center";
     contentLocation.style.alignItems = "center";
-    let contentDate = createElement("div", ["cell", "lastDate"], ["24/03/25"]);
+    let contentDate = createElement("div", ["cell", "lastDate"], ["Obteniendo fecha..."]);
     contentDate.style.width = "22.5%";
-    contentDate.style.borderRight = "1px solid black";
     contentDate.style.display = "flex";
     contentDate.style.justifyContent = "center";
     contentDate.style.alignItems = "center";
 
-    let columnDevices = createElement("div", ["columnDevices"], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
+    let columnDevices = createElement("div", ["columnDevice", Id], [contentId.outerHTML, contentState.outerHTML, contentLocation.outerHTML, contentDate.outerHTML]);
     columnDevices.style.display = "flex";
     columnDevices.style.height = "30px";
     columnDevices.style.width = "90%";
@@ -199,6 +198,7 @@ let get_current_sensor_data = function () {
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             let columnMeasurements = createColumnMeasurement(paramsData.device_id, paramsData.temperature, paramsData.humidity, paramsData.date);
+            document.getElementsByClassName("columnDevice " + paramsData.device_id)[0].getElementsByClassName("cell lastDate")[0].textContent = paramsData.date;
             $(columnMeasurements).appendTo(".tableMeasurements." + paramsData.device_id);
         }
     });
