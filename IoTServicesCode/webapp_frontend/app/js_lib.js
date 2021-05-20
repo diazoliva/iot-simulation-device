@@ -186,7 +186,7 @@ function createColumnDevices(Id, Location, State){
 
 function getReadyDevices(){
     let devicesColumnTitle = createColumnTitleDevices();
-    $(devicesColumnTitle).appendTo(".device_list");
+    $(devicesColumnTitle).prependTo(".device_list");
 }
 
 let server_address = "http://35.241.218.104:5000/"
@@ -203,13 +203,12 @@ let get_current_sensor_data = function () {
 
 let get_device_list = function () {
     $.getJSON(server_address + "dso/state/", function (data) {
-        // $(".tableDevices").empty();
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state);
             let columnDevices = createColumnDevices();
-            $("<div> Devices: " + paramsData.device_id + "</div>").appendTo(".device_list");
+            $(columnDevices).appendTo(".table_devices");
         }
     });
 }
