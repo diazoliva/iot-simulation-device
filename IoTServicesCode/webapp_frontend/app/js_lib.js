@@ -20,7 +20,7 @@ function createElement(Type, ClassName, Content) {
 
 function createTableMeasurement(Id, Location, State) {
     let idClass = Id.replace(/\s/g, '');
-    let reference_device = createElement("p", ["titleReference"],["Device:"]);
+    let reference_device = createElement("p", ["titleReference"], ["Device:"]);
     reference_device.style.paddingRight = "7.5px";
     let device_id = createElement("p", ["title, id"], [Id]);
     let underscore = createElement("p", ["title, underscore"], ["-"]);
@@ -41,7 +41,7 @@ function createTableMeasurement(Id, Location, State) {
     return deviceContent;
 }
 
-function createColumnTitleMeasurement(){
+function createColumnTitleMeasurement() {
     let titleDate = createElement("div", ["titleCellDate"], ["Measurements"]);
     titleDate.style.display = "flex";
     titleDate.style.width = "50%";
@@ -97,7 +97,7 @@ function createColumnMeasurement(Id, Temperature, Humidity, Date) {
     return columnMeasurements;
 }
 
-function getReadyMeasurements(Id, Location, State){
+function getReadyMeasurements(Id, Location, State) {
     let deviceContent = createTableMeasurement(Id, Location, State);
     $(deviceContent).appendTo(".measurements");
     let idClass = Id.replace(/\s/g, '');
@@ -105,7 +105,7 @@ function getReadyMeasurements(Id, Location, State){
     $(tableTitle).prependTo(".superiorTableMeasurements." + idClass);
 }
 
-function createColumnTitleDevices(){
+function createColumnTitleDevices() {
     let titleDevice = createElement("div", ["titleDeviceCellDevice"], ["Device"]);
     titleDevice.style.display = "flex";
     titleDevice.style.width = "15%";
@@ -135,7 +135,8 @@ function createColumnTitleDevices(){
     columnTitle.style.fontWeight = "bold";
     let buttonTitle = createElement("button", null, null);
     buttonTitle.style.width = "9%";
-    buttonTitle.style.marginLeft = "7px";;
+    buttonTitle.style.marginLeft = "7px";
+    ;
     buttonTitle.style.display = "none";
     let wholeColumnTitle = createElement("div", null, [columnTitle.outerHTML, buttonTitle.outerHTML]);
     wholeColumnTitle.style.display = "flex";
@@ -147,19 +148,20 @@ function hideMeasurements() {
     document.getElementsByClassName("allMeasurements")[0].style.display = "none";
     document.getElementsByClassName("allDevices")[0].style.display = "block";
 }
-function hideMeasurementsDevice(idClass){
+
+function hideMeasurementsDevice(idClass) {
     hideMeasurements();
     document.getElementsByClassName("device " + idClass)[0].style.display = "none";
 }
 
-function showMeasurementsDevice(idClass){
+function showMeasurementsDevice(idClass) {
     document.getElementsByClassName("allMeasurements")[0].style.display = "block";
     alert(document.getElementsByClassName("allMeasurements")[0].textContent);
     document.getElementsByClassName("device " + idClass)[0].style.display = "block";
     document.getElementsByClassName("allDevices")[0].style.display = "none";
 }
 
-function createColumnDevices(Id, Location, State, Date){
+function createColumnDevices(Id, Location, State, Date) {
     let idClass = Id.replace(/\s/g, '');
     let contentId = createElement("div", ["cell", "id"], [Id]);
     contentId.style.width = "15%";
@@ -206,7 +208,7 @@ function createColumnDevices(Id, Location, State, Date){
     return wholeColumnDevice;
 }
 
-function getReadyDevices(){
+function getReadyDevices() {
     let devicesColumnTitle = createColumnTitleDevices();
     $(devicesColumnTitle).prependTo(".device_list");
     document.getElementsByClassName("table_devices")[0].style.borderLeft = "1px solid black";
@@ -230,17 +232,17 @@ let get_device_list = function () {
         getReadyDevices();
         for (let i = 0; i < data.length; i++) {
             let paramsData = data[i];
-            if (paramsData.state == 0) paramsData.state == "Inactivo";
-            else paramsData.state == "Activo";
+            if (paramsData.state == 0) paramsData.state = "Inactivo";
+            else paramsData.state = "Activo";
             getReadyMeasurements(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             hideMeasurements();
             let columnDevices = createColumnDevices(paramsData.device_id, paramsData.location, paramsData.state, paramsData.date);
             $(columnDevices).appendTo(".table_devices");
             let idClass = paramsData.device_id.replace(/\s/g, '');
-            $(".button." + idClass).click(function(){
+            $(".button." + idClass).click(function () {
                 showMeasurementsDevice(idClass);
             });
-            $(".buttonMeasurement." + idClass).click(function(){
+            $(".buttonMeasurement." + idClass).click(function () {
                 hideMeasurementsDevice(idClass);
             });
         }
